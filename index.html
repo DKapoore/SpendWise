@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpendWise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f4f4f9;
+        }
+
+        .container {
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .entry {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .entry input {
+            width: 40%;
+        }
+
+        .entry button {
+            padding: 0 10px;
+            background: #f44336;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #addEntry {
+            background: #4caf50;
+            color: #fff;
+        }
+
+        #savePDF {
+            background: #2196f3;
+            color: #fff;
+        }
+
+        #clearScreen {
+            background: #f44336;
+            color: #fff;
+        }
+
+        #remainingAmount {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #remainingAmount span.red {
+            color: red;
+        }
+
+        #totalAmount {
+            display: block;
+            margin: 10px auto 20px;
+            width: 80%;
+        }
+        
+        .powered-by {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .ad-container {
+            margin: 15px 0;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+    
+    <!-- Ad code configuration -->
+    <script type="text/javascript">
+        atOptions = {
+            'key' : 'f9b2f2ad603a4316fe64dc8a0428237a',
+            'format' : 'iframe',
+            'height' : 60,
+            'width' : 468,
+            'params' : {}
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>SpendWise</h1>
+        <p class="powered-by">Powered by DKapoore</p>
+        
+        <!-- Ad container -->
+        <div class="ad-container">
+            <script type="text/javascript" src="//www.highperformanceformat.com/f9b2f2ad603a4316fe64dc8a0428237a/invoke.js"></script>
+        </div>
+        
+        <p>SpendWise helps you track your expenses and stay within budget. Enter your total amount, log each spend, and see your remaining balance instantly.</p>
+        
+        <input type="number" id="totalAmount" placeholder="Enter Total Amount" />
+        <div id="entryContainer">
+            <!-- New Input Bars will be added here -->
+        </div>
+        <div class="button-container">
+            <button id="addEntry">+</button>
+            <button id="savePDF">Save as PDF</button>
+            <button id="clearScreen">Clear</button>
+        </div>
+        <div id="remainingAmount">Remaining Amount: <span id="remainingValue">0</span></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        let totalAmountInput = document.getElementById("totalAmount");
+        let entryContainer = document.getElementById("entryContainer");
+        let remainingValue = document.getElementById("remainingValue");
+        let remainingAmountDiv = document.getElementById("remainingAmount");
+
+        function calculateRemainingAmount() {
+            let totalAmount = parseFloat(totalAmountInput.value) || 0;
+            let totalDeducted = 0;
+
+            document.querySelectorAll(".entry input[type='number']").forEach((input) => {
+                totalDeducted += parseFloat(input.value) || 0;
+            });
+
+            let remaining = totalAmount - totalDeducted;
+
+            if (remaining >= 0) {
+                remainingAmountDiv.innerHTML = `Remaining Amount: <span id="remainingValue">₹${remaining}</span>`;
+            } else {
+                remainingAmountDiv.innerHTML = `Extra Spend: <span class="red">₹${Math.abs(remaining)}</span>`;
+            }
+        }
+
+        document.getElementById("addEntry").addEventListener("click", () => {
+            if (totalAmountInput.disabled === false) {
+                totalAmountInput.disabled = true;
+                remainingValue.textContent = totalAmountInput.value;
+            }
+
+            const entryDiv = document.createElement("div");
+            entryDiv.className = "entry";
+
+            const minusButton = document.createElement("button");
+            minusButton.textContent = "-";
+            minusButton.addEventListener("click", () => {
+                entryDiv.remove();
+                calculateRemainingAmount();
+            });
+
+            const textInput = document.createElement("input");
+            textInput.type = "text";
+            textInput.placeholder = "Short Description";
+
+            const amountInput = document.createElement("input");
+            amountInput.type = "number";
+            amountInput.placeholder = "Enter Amount";
+
+            amountInput.addEventListener("input", calculateRemainingAmount);
+
+            entryDiv.appendChild(minusButton);
+            entryDiv.appendChild(textInput);
+            entryDiv.appendChild(amountInput);
+            entryContainer.appendChild(entryDiv);
+
+            calculateRemainingAmount();
+        });
+
+        document.getElementById("clearScreen").addEventListener("click", () => {
+            location.reload();
+        });
+
+        document.getElementById("savePDF").addEventListener("click", () => {
+            const currentDate = new Date().toLocaleDateString("en-GB");
+            let totalAmount = totalAmountInput.value;
+            let entries = [];
+            
+            document.querySelectorAll(".entry").forEach((entry) => {
+                const description = entry.querySelector('input[type="text"]').value || "N/A";
+                const amount = entry.querySelector('input[type="number"]').value || 0;
+                entries.push({ description, amount });
+            });
+
+            const remaining = parseFloat(remainingValue.textContent.replace("₹", "")) || 0;
+            const remainingText = remaining >= 0 
+                ? `Remaining Amount: ₹${remaining}` 
+                : `Extra Spend: ₹${Math.abs(remaining)}`;
+
+            const content = `
+                <div style="text-align: center; font-family: Arial, sans-serif;">
+                    <h2 style="color: green;">SpendWise</h2>
+                    <p>Budget Tracker</p>
+                    <p>Budget Amount: ₹${totalAmount}</p>
+                    <p>Date: ${currentDate}</p>
+                    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                        <tr>
+                            <th style="border: 1px solid black; padding: 10px;">Description</th>
+                            <th style="border: 1px solid black; padding: 10px;">Amount</th>
+                        </tr>
+                        ${entries.map(entry => `
+                            <tr>
+                                <td style="border: 1px solid black; padding: 10px;">${entry.description}</td>
+                                <td style="border: 1px solid black; padding: 10px; text-align: right;">₹${entry.amount}</td>
+                            </tr>
+                        `).join("")}
+                    </table>
+                    <p style="font-weight: bold; font-size: 18px;">${remainingText}</p>
+                </div>
+            `;
+
+            const element = document.createElement('div');
+            element.innerHTML = content;
+            html2pdf().from(element)
+                .set({
+                    margin: 1,
+                    filename: "SpendWise_Report.pdf",
+                    html2canvas: { scale: 2 },
+                    jsPDF: { orientation: "portrait" }
+                })
+                .save();
+        });
+    </script>
+</body>
+</html>
