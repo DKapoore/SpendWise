@@ -3,35 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpendWise</title>
+    <title>SpendWise - Budget Tracker</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            background: #f4f4f9;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .container {
             text-align: center;
             width: 90%;
-            max-width: 400px;
+            max-width: 450px;
             background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 28px;
+        }
+
+        .powered-by {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .description {
+            color: #7f8c8d;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 25px;
         }
 
         input {
             width: 100%;
-            padding: 10px;
+            padding: 12px 15px;
             margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
             font-size: 16px;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border-color: #3498db;
+            outline: none;
         }
 
         .entry {
@@ -39,73 +68,107 @@
             justify-content: space-between;
             gap: 10px;
             align-items: center;
+            margin-bottom: 12px;
         }
 
         .entry input {
-            width: 40%;
+            width: 48%;
+            margin: 0;
         }
 
         .entry button {
-            padding: 0 10px;
-            background: #f44336;
+            padding: 8px 15px;
+            background: #e74c3c;
             color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .entry button:hover {
+            background: #c0392b;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 20px 0;
         }
 
         .button-container button {
-            padding: 10px 20px;
-            margin: 5px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 16px;
             cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
         }
 
         #addEntry {
-            background: #4caf50;
+            background: #2ecc71;
             color: #fff;
+            flex: 1;
         }
 
-        #savePDF {
-            background: #2196f3;
+        #addEntry:hover {
+            background: #27ae60;
+        }
+
+        #exportPDF {
+            background: #9b59b6;
             color: #fff;
+            flex: 2;
+        }
+
+        #exportPDF:hover {
+            background: #8e44ad;
         }
 
         #clearScreen {
-            background: #f44336;
+            background: #e74c3c;
             color: #fff;
+            flex: 1;
+        }
+
+        #clearScreen:hover {
+            background: #c0392b;
         }
 
         #remainingAmount {
-            margin-top: 20px;
-            font-size: 18px;
+            margin-top: 25px;
+            font-size: 20px;
             font-weight: bold;
+            padding: 15px;
+            border-radius: 10px;
+            background: #f8f9fa;
         }
 
-        #remainingAmount span.red {
-            color: red;
+        #remainingAmount span.positive {
+            color: #27ae60;
+        }
+
+        #remainingAmount span.negative {
+            color: #e74c3c;
         }
 
         #totalAmount {
             display: block;
-            margin: 10px auto 20px;
-            width: 80%;
+            margin: 15px auto;
+            width: 85%;
+            font-weight: bold;
         }
-        
-        .powered-by {
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 10px;
-        }
-        
+
         .ad-container {
-            margin: 15px 0;
+            margin: 20px 0;
             display: flex;
             justify-content: center;
+            min-height: 60px;
         }
-        
+
         /* PDF Modal Styles */
         #pdfModal {
             display: none;
@@ -126,29 +189,67 @@
             width: 90%;
             height: 80%;
             border: none;
+            border-radius: 10px;
         }
         
         .close-modal {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 20px;
+            right: 20px;
             color: white;
-            font-size: 30px;
+            font-size: 35px;
             cursor: pointer;
             z-index: 1001;
+            background: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .download-btn {
             position: absolute;
-            bottom: 20px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            padding: 10px 20px;
-            background: #2196f3;
+            padding: 12px 25px;
+            background: #9b59b6;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .download-btn:hover {
+            background: #8e44ad;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .button-container {
+                flex-direction: column;
+            }
+            
+            .entry {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .entry input {
+                width: 100%;
+            }
+            
+            .entry button {
+                width: 100%;
+                padding: 10px;
+            }
         }
     </style>
     
@@ -173,18 +274,18 @@
             <script type="text/javascript" src="//www.highperformanceformat.com/f9b2f2ad603a4316fe64dc8a0428237a/invoke.js"></script>
         </div>
         
-        <p>SpendWise helps you track your expenses and stay within budget. Enter your total amount, log each spend, and see your remaining balance instantly.</p>
+        <p class="description">SpendWise helps you track your expenses and stay within budget. Enter your total amount, log each spend, and see your remaining balance instantly.</p>
         
-        <input type="number" id="totalAmount" placeholder="Enter Total Amount" />
+        <input type="number" id="totalAmount" placeholder="Enter Total Amount (₹)" />
         <div id="entryContainer">
             <!-- New Input Bars will be added here -->
         </div>
         <div class="button-container">
-            <button id="addEntry">+</button>
-            <button id="savePDF">Save as PDF</button>
-            <button id="clearScreen">Clear</button>
+            <button id="addEntry">+ Add Item</button>
+            <button id="exportPDF">Export PDF</button>
+            <button id="clearScreen">Clear All</button>
         </div>
-        <div id="remainingAmount">Remaining Amount: <span id="remainingValue">0</span></div>
+        <div id="remainingAmount">Remaining Amount: <span id="remainingValue" class="positive">₹0</span></div>
     </div>
     
     <!-- PDF Modal -->
@@ -214,50 +315,60 @@
             });
 
             let remaining = totalAmount - totalDeducted;
+            remainingValue.textContent = `₹${remaining}`;
 
             if (remaining >= 0) {
-                remainingAmountDiv.innerHTML = `Remaining Amount: <span id="remainingValue">₹${remaining}</span>`;
+                remainingValue.className = "positive";
+                remainingAmountDiv.innerHTML = `Remaining Amount: <span id="remainingValue" class="positive">₹${remaining}</span>`;
             } else {
-                remainingAmountDiv.innerHTML = `Extra Spend: <span class="red">₹${Math.abs(remaining)}</span>`;
+                remainingValue.className = "negative";
+                remainingAmountDiv.innerHTML = `Overspent: <span class="negative">₹${Math.abs(remaining)}</span>`;
             }
         }
 
         document.getElementById("addEntry").addEventListener("click", () => {
+            if (!totalAmountInput.value) {
+                alert("Please enter total amount first!");
+                totalAmountInput.focus();
+                return;
+            }
+
             if (totalAmountInput.disabled === false) {
                 totalAmountInput.disabled = true;
-                remainingValue.textContent = totalAmountInput.value;
             }
 
             const entryDiv = document.createElement("div");
             entryDiv.className = "entry";
 
-            const minusButton = document.createElement("button");
-            minusButton.textContent = "-";
-            minusButton.addEventListener("click", () => {
+            const textInput = document.createElement("input");
+            textInput.type = "text";
+            textInput.placeholder = "Item description";
+
+            const amountInput = document.createElement("input");
+            amountInput.type = "number";
+            amountInput.placeholder = "Amount (₹)";
+            amountInput.min = "0";
+            amountInput.addEventListener("input", calculateRemainingAmount);
+
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.addEventListener("click", () => {
                 entryDiv.remove();
                 calculateRemainingAmount();
             });
 
-            const textInput = document.createElement("input");
-            textInput.type = "text";
-            textInput.placeholder = "Short Description";
-
-            const amountInput = document.createElement("input");
-            amountInput.type = "number";
-            amountInput.placeholder = "Enter Amount";
-
-            amountInput.addEventListener("input", calculateRemainingAmount);
-
-            entryDiv.appendChild(minusButton);
             entryDiv.appendChild(textInput);
             entryDiv.appendChild(amountInput);
+            entryDiv.appendChild(deleteButton);
             entryContainer.appendChild(entryDiv);
 
-            calculateRemainingAmount();
+            textInput.focus();
         });
 
         document.getElementById("clearScreen").addEventListener("click", () => {
-            location.reload();
+            if (confirm("Are you sure you want to clear all data?")) {
+                location.reload();
+            }
         });
 
         // Detect if the device is Android
@@ -287,51 +398,79 @@
             }
         });
 
-        document.getElementById("savePDF").addEventListener("click", () => {
-            const currentDate = new Date().toLocaleDateString("en-GB");
+        document.getElementById("exportPDF").addEventListener("click", () => {
+            if (!totalAmountInput.value) {
+                alert("Please enter total amount first!");
+                totalAmountInput.focus();
+                return;
+            }
+
+            const currentDate = new Date();
+            const dateStr = currentDate.toLocaleDateString("en-GB", {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
+            });
+            const timeStr = currentDate.toLocaleTimeString("en-GB", {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
             let totalAmount = totalAmountInput.value;
             let entries = [];
             
             document.querySelectorAll(".entry").forEach((entry) => {
-                const description = entry.querySelector('input[type="text"]').value || "N/A";
+                const description = entry.querySelector('input[type="text"]').value || "Unnamed expense";
                 const amount = entry.querySelector('input[type="number"]').value || 0;
-                entries.push({ description, amount });
+                if (description && amount) {
+                    entries.push({ description, amount });
+                }
             });
 
             const remaining = parseFloat(remainingValue.textContent.replace("₹", "")) || 0;
-            const remainingText = remaining >= 0 
-                ? `Remaining Amount: ₹${remaining}` 
-                : `Extra Spend: ₹${Math.abs(remaining)}`;
 
             // Create mobile-friendly PDF content
             const content = `
-                <div style="font-family: Arial, sans-serif; padding: 15px; max-width: 100%;">
-                    <h2 style="color: green; text-align: center; font-size: 22px;">SpendWise</h2>
-                    <p style="text-align: center; margin-bottom: 5px;">Budget Tracker</p>
-                    <p style="text-align: center; margin-bottom: 15px; font-size: 14px;">Date: ${currentDate}</p>
+                <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 100%; color: #333;">
+                    <h2 style="color: #2c3e50; text-align: center; margin-bottom: 5px;">SpendWise</h2>
+                    <p style="text-align: center; color: #7f8c8d; margin-top: 0;">Budget Tracker Report</p>
                     
-                    <div style="background: #f9f9f9; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
-                        <p style="margin: 5px 0; font-weight: bold;">Budget Amount: ₹${totalAmount}</p>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                        <div>
+                            <p style="margin: 2px 0; font-size: 14px;"><strong>Date:</strong> ${dateStr}</p>
+                            <p style="margin: 2px 0; font-size: 14px;"><strong>Time:</strong> ${timeStr}</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p style="margin: 2px 0; font-size: 14px;"><strong>Total Budget:</strong> ₹${totalAmount}</p>
+                        </div>
                     </div>
                     
-                    <table style="width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 14px;">
-                        <tr style="background: #eaeaea;">
-                            <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Description</th>
-                            <th style="border: 1px solid #ddd; padding: 10px; text-align: right;">Amount</th>
+                    <table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px;">
+                        <tr style="background: #6a11cb; color: white;">
+                            <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Description</th>
+                            <th style="border: 1px solid #ddd; padding: 12px; text-align: right;">Amount (₹)</th>
                         </tr>
                         ${entries.map(entry => `
                             <tr>
-                                <td style="border: 1px solid #ddd; padding: 8px; word-break: break-word;">${entry.description}</td>
-                                <td style="border: 1px solid #ddd; padding: 8px; text-align: right;">₹${entry.amount}</td>
+                                <td style="border: 1px solid #ddd; padding: 10px; word-break: break-word;">${entry.description}</td>
+                                <td style="border: 1px solid #ddd; padding: 10px; text-align: right;">₹${entry.amount}</td>
                             </tr>
                         `).join("")}
+                        <tr style="font-weight: bold;">
+                            <td style="border: 1px solid #ddd; padding: 10px; text-align: right;">Total Spent:</td>
+                            <td style="border: 1px solid #ddd; padding: 10px; text-align: right;">₹${totalAmount - remaining}</td>
+                        </tr>
                     </table>
                     
-                    <div style="margin-top: 20px; padding: 10px; background: ${remaining >= 0 ? '#e8f5e9' : '#ffebee'}; border-radius: 5px;">
-                        <p style="font-weight: bold; font-size: 16px; text-align: center; margin: 0; color: ${remaining >= 0 ? '#2e7d32' : '#c62828'};">${remainingText}</p>
+                    <div style="margin-top: 25px; padding: 15px; background: ${remaining >= 0 ? '#e8f5e9' : '#ffebee'}; border-radius: 8px; text-align: center;">
+                        <p style="font-weight: bold; font-size: 18px; margin: 0; color: ${remaining >= 0 ? '#2e7d32' : '#c62828'};">
+                            ${remaining >= 0 ? `Remaining Amount: ₹${remaining}` : `Overspent: ₹${Math.abs(remaining)}`}
+                        </p>
                     </div>
                     
-                    <p style="text-align: center; margin-top: 20px; font-size: 12px; color: #777;">Generated by SpendWise - Powered by DKapoore</p>
+                    <p style="text-align: center; margin-top: 25px; font-size: 12px; color: #7f8c8d;">
+                        Generated by SpendWise - Powered by DKapoore
+                    </p>
                 </div>
             `;
 
@@ -348,7 +487,7 @@
                     logging: true
                 },
                 jsPDF: { 
-                    unit: "in", 
+                    unit: "mm", 
                     format: "a4", 
                     orientation: "portrait" 
                 }
@@ -367,6 +506,9 @@
                 html2pdf().set(opt).from(element).save();
             }
         });
+
+        // Initialize with focus on total amount input
+        totalAmountInput.focus();
     </script>
 </body>
 </html>
