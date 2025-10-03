@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - SpendWise Budget Tracker</title>
+    <meta name="description" content="SpendWise Privacy Policy. Learn how we protect your data and privacy while using our free budget tracking application.">
+    <meta name="keywords" content="privacy policy, data protection, budget tracker privacy, expense manager security">
+    <meta name="author" content="DKapoore">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo-icon {
+            font-size: 1.8rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .page-header h1 {
+            color: #2e7d32;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .legal-content {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .last-updated {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            color: #666;
+        }
+        
+        .policy-section {
+            margin-bottom: 30px;
+        }
+        
+        .policy-section h2 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .policy-section p {
+            margin-bottom: 15px;
+        }
+        
+        .policy-section ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .policy-section li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background: #f1f8e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #2e7d32;
+            color: white;
+            padding: 30px 0 20px;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #c8e6c9;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #c8e6c9;
+            font-size: 0.9rem;
+        }
+        
+        /* Minimal Footer */
+        .minimal-footer {
+            background-color: #e8e8e8;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            border-top: 1px solid #ddd;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-links a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            color: #2e7d32;
+        }
+        
+        .separator {
+            color: #999;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .legal-content {
+                padding: 20px;
+            }
+            
+            .footer-links {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">💰</span>
+                <span>SpendWise</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="SpendWise.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="terms-of-service.html">Terms</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="main-content">
+        <div class="page-header">
+            <h1>Privacy Policy</h1>
+            <p>How we protect your data and privacy</p>
+        </div>
+        
+        <div class="legal-content">
+            <div class="last-updated">
+                <p><strong>Last Updated: January 15, 2024</strong></p>
+            </div>
+            
+            <div class="policy-section">
+                <h2>1. Introduction</h2>
+                <p>Welcome to SpendWise. We are committed to protecting your privacy and ensuring transparency about how we handle your information. This Privacy Policy explains our practices regarding the collection, use, and disclosure of information when you use our Service.</p>
+                <p>By using SpendWise, you agree to the collection and use of information in accordance with this policy.</p>
+            </div>
+            
+            <div class="policy-section">
+                <h2>2. Information We Collect</h2>
+                <p>SpendWise is designed with your privacy in mind. We collect minimal information to provide and improve our service:</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Important:</strong> Your financial data (budgets, expenses, and calculations) never leaves your device. We do not collect, store, or have access to your financial information.</p>
+                </div>
+                
+                <h3>2.1 Information You Provide</h3>
+                <ul>
+                    <li><strong>Expense Data:</strong> All budget amounts, expense descriptions, and calculations are stored locally in your browser and are never transmitted to our servers.</li>
+                    <li><strong>Contact Information:</strong> If you contact us directly, we may receive additional information such as your name, email address, and the contents of your message.</li>
+                </ul>
+                
+                <h3>2.2 Automatically Collected Information</h3>
+                <ul>
+                    <li><strong>Usage Data:</strong> We may collect anonymous information about how you interact with our application to improve user experience.</li>
+                    <li><strong>Technical Information:</strong> Browser type, version, and other diagnostic data may be collected for technical optimization.</li>
+                </ul>
+            </div>
+            
+            <div class="policy-section">
+                <h2>3. How We Use Your Information</h2>
+                <p>We use the limited information we collect for various purposes:</p>
+                <ul>
+                    <li>To provide and maintain our Service</li>
+                    <li>To notify you about changes to our Service</li>
+                    <li>To provide customer support</li>
+                    <li>To gather analysis or valuable information to improve our Service</li>
+                    <li>To monitor the usage of our Service</li>
+                    <li>To detect, prevent and address technical issues</li>
+                </ul>
+            </div>
+            
+            <div class="policy-section">
+                <h2>4. Data Storage and Security</h2>
+                <p>Your data security is our priority:</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Local Storage:</strong> All your financial data is stored locally in your browser using localStorage. This means your budget information, expenses, and calculations remain on your device and are not transmitted to our servers.</p>
+                </div>
+                
+                <ul>
+                    <li><strong>No Account Required:</strong> Since we don't require user accounts, we don't store personal identifiers.</li>
+                    <li><strong>Browser-Based:</strong> Your data persists in your browser until you clear your browser data or use the "Clear" function in our application.</li>
+                    <li><strong>Export Responsibility:</strong> We recommend regularly exporting your data using our PDF export feature to maintain backups.</li>
+                </ul>
+            </div>
+            
+            <div class="policy-section">
+                <h2>5. Third-Party Services</h2>
+                <p>We may employ third-party companies and individuals for the following reasons:</p>
+                
+                <h3>5.1 Advertising</h3>
+                <p>SpendWise displays advertisements to support our free service. These third-party ad servers or ad networks use technology to serve advertisements that appear on our Service.</p>
+                <ul>
+                    <li>Third-party advertisers may use cookies, JavaScript, or Web Beacons to measure advertising effectiveness</li>
+                    <li>We have no access to or control over these cookies used by third-party advertisers</li>
+                    <li>You should consult the respective privacy policies of these third-party ad servers for more detailed information</li>
+                </ul>
+                
+                <h3>5.2 Analytics</h3>
+                <p>We may use third-party Service Providers to monitor and analyze the use of our Service.</p>
+            </div>
+            
+            <div class="policy-section">
+                <h2>6. Data Retention</h2>
+                <p>Since your financial data is stored locally in your browser:</p>
+                <ul>
+                    <li>We do not retain your financial data on our servers</li>
+                    <li>Your data remains in your browser until you clear it</li>
+                    <li>Clearing your browser data will remove all SpendWise information</li>
+                </ul>
+            </div>
+            
+            <div class="policy-section">
+                <h2>7. Your Data Protection Rights</h2>
+                <p>Depending on your location, you may have certain data protection rights. Since we don't store your personal financial data, many of these rights are inherently protected:</p>
+                <ul>
+                    <li><strong>The right to access:</strong> You can access all your data directly in the application</li>
+                    <li><strong>The right to rectification:</strong> You can edit your data directly in the application</li>
+                    <li><strong>The right to erasure:</strong> You can delete your data using the "Clear" function or by clearing browser data</li>
+                    <li><strong>The right to data portability:</strong> You can export your data using our PDF export feature</li>
+                </ul>
+            </div>
+            
+            <div class="policy-section">
+                <h2>8. Children's Privacy</h2>
+                <p>Our Service does not address anyone under the age of 13. We do not knowingly collect personally identifiable information from anyone under the age of 13.</p>
+            </div>
+            
+            <div class="policy-section">
+                <h2>9. Changes to This Privacy Policy</h2>
+                <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.</p>
+                <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+            </div>
+            
+            <div class="policy-section">
+                <h2>10. Contact Us</h2>
+                <p>If you have any questions about this Privacy Policy, please contact us:</p>
+                <ul>
+                    <li>By email: privacy@spendwise.com</li>
+                    <li>By visiting our Contact page: <a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>SpendWise</h3>
+                <p>Free online budget tracker and expense management tool. Take control of your finances today.</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="SpendWise.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="contact.html">Support</a></li>
+                    <li><a href="https://twitter.com/spendwise">Twitter</a></li>
+                    <li><a href="https://facebook.com/spendwise">Facebook</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2024 SpendWise. All rights reserved. Powered by DKapoore</p>
+        </div>
+    </footer>
+    
+    <!-- Minimal Footer -->
+    <div class="minimal-footer">
+        <div class="footer-links">
+            <a href="about.html">About</a>
+            <span class="separator">|</span>
+            <a href="contact.html">Contact</a>
+            <span class="separator">|</span>
+            <a href="faq.html">FAQ</a>
+            <span class="separator">|</span>
+            <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+    </div>
+</body>
+</html>
